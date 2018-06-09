@@ -25,12 +25,14 @@
                 var ajax = new XMLHttpRequest();
                 var ajax2 = new XMLHttpRequest();
                 var ajax3 = new XMLHttpRequest();
+                var ajax4 = new XMLHttpRequest();
                 var ajax5 = new XMLHttpRequest();
                 var ajax6 = new XMLHttpRequest();
 
                 ajax.responseType = "blob";
                 ajax2.responseType = "blob";
                 ajax3.responseType = "blob";
+                ajax4.responseType = "blob";
                 ajax5.responseType = "blob";
                 ajax6.responseType = "blob";
 
@@ -45,6 +47,11 @@
                 };
 
                 ajax3.upload.onprogress = function(e) {
+                    var percent = (e.loaded / e.total) * 100;
+                    progressBar.value = percent;
+                };
+
+                ajax4.upload.onprogress = function(e) {
                     var percent = (e.loaded / e.total) * 100;
                     progressBar.value = percent;
                 };
@@ -119,6 +126,26 @@
                     }
                 };
 
+                ajax4.onload = function() {
+                    if (ajax4.status === 200) {
+                        var urlCreator = window.URL || window.webkitURL;
+                        var base64Image = urlCreator.createObjectURL(ajax4.response);
+
+                        var img = document.createElement("IMG");
+                        img.style.margin = "auto";
+                        img.style.padding = "0";
+                        img.style.width = "100%";
+                        img.src = base64Image;
+
+                        progressBar.value = 0;
+
+                        var sharpContainer = document.getElementById("sharpenContainer");
+                        sharpContainer.appendChild(img);
+                    } else {
+                        console.log("Error :(");
+                    }
+                };
+
                 ajax5.onload = function() {
                     if (ajax5.status === 200) {
                         var urlCreator = window.URL || window.webkitURL;
@@ -172,6 +199,10 @@
                     console.log("Error connecting to backend... :(");
                 };
 
+                ajax4.onerror = function() {
+                    console.log("Error connecting to backend... :(");
+                };
+
                 ajax5.onerror = function() {
                     console.log("Error connecting to backend... :(");
                 };
@@ -193,6 +224,10 @@
                 ajax3.open("POST", "UploadToSeeTheBlurMagic", true);
                 ajax3.setRequestHeader("Content-Type", fileInput.files[0].type);
                 ajax3.send(fileInput.files[0]);
+
+                ajax4.open("POST", "UploadToSeeTheSharpenMagic", true);
+                ajax4.setRequestHeader("Content-Type", fileInput.files[0].type);
+                ajax4.send(fileInput.files[0]);
 
                 ajax5.open("POST", "UploadToSeeTheBlackAndWhiteMagic", true);
                 ajax5.setRequestHeader("Content-Type", fileInput.files[0].type);

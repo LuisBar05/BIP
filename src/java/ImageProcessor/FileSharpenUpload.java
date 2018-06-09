@@ -5,7 +5,7 @@
  */
 package ImageProcessor;
 
-import Filters.BlackAndWhiteEffect;
+import Filters.SharpenEffect;
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -26,9 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Luis
  */
-@WebServlet(name = "FileBnWUpload", urlPatterns = {"/UploadToSeeTheBlackAndWhiteMagic"})
+@WebServlet(name = "FileSharpenUpload", urlPatterns = {"/UploadToSeeTheSharpenMagic"})
 @MultipartConfig
-public class FileBlackandWhiteUpload extends HttpServlet {
+public class FileSharpenUpload extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,19 +38,8 @@ public class FileBlackandWhiteUpload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        /**
-         * Upload the image file and pass it via response to the corresponding
-         * section
-         */
-        Runnable myThread4 = new RunnableImpl(request, response);
-        myThread4.run();
-
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+        Runnable myThread6 = new RunnableImpl(request, response);
+        myThread6.run();
     }
 
     private static class RunnableImpl implements Runnable {
@@ -67,23 +56,24 @@ public class FileBlackandWhiteUpload extends HttpServlet {
         public void run() {
             try {
                 InputStream in = request.getInputStream();
-                BlackAndWhiteEffect bnwFilter = new BlackAndWhiteEffect();
-                bnwFilter.setMyImage(ImageIO.read(in));
-                bnwFilter.ApplyFilter();
-                BufferedImage thumb = new BufferedImage(bnwFilter.getMyImage().getWidth(), bnwFilter.getMyImage().getHeight(),
-                        bnwFilter.getMyImage().getType());
+                SharpenEffect sharpFilter = new SharpenEffect();
+                sharpFilter.setMyImage(ImageIO.read(in));
+                sharpFilter.ApplyFilter();
+                BufferedImage thumb = new BufferedImage(sharpFilter.getMyImage().getWidth(), sharpFilter.getMyImage().getHeight(),
+                        sharpFilter.getMyImage().getType());
                 Graphics2D g = thumb.createGraphics();
                 g.setComposite(AlphaComposite.Src);
                 g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g.drawImage(bnwFilter.getMyImage(), 0, 0, bnwFilter.getMyImage().getWidth(), bnwFilter.getMyImage().getHeight(), null);
-
+                g.drawImage(sharpFilter.getMyImage(), 0, 0, sharpFilter.getMyImage().getWidth(), sharpFilter.getMyImage().getHeight(), null);
                 response.setContentType("image/jpg");
                 ImageIO.write(thumb, "jpg", response.getOutputStream());
             } catch (IOException ex) {
-                Logger.getLogger(FileBlackandWhiteUpload.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FileSharpenUpload.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }
+
 }
