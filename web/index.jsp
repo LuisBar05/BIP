@@ -257,7 +257,7 @@
         <div class="toggle-info">
             <button class="accordion">A brief description</button>
             <div class="panel">
-                <p>We're glad to introduce you to <strong>BIP!</strong> This is a small Web application that allows you to load any image file you want (supported file extensions: <strong>JPG/PNG</strong>), and automatically apply a selection of various popular favorites filters on it, at this very moment, without redirecting or changing page. (Yes, it is possible.)<br><strong>Negative</strong>, <strong>Blurred</strong>, <strong>Sharpened</strong>, and <strong>Black'n'White</strong> versions of your preferred image, instantly, all of them.</p>
+                <p>We're glad to introduce you to <strong>BIP!</strong> This is a small Web application that allows you to load any image file you want (supported file extensions: <strong>JPG/PNG</strong>), and automatically apply a selection of various popular favorites filters on it, at this very moment, without redirecting or changing page. (Yes, it is possible.)<br><strong>Negative</strong>, <strong>Blurred</strong>, <strong>Sharpened</strong>, <strong>Black'n'White</strong> and yes <strong>Sepia</strong> versions of your preferred image, instantly, all of them.</p>
             </div>
 
             <button class="accordion">It's so simple, you will love it</button>
@@ -269,7 +269,7 @@
             <div class="panel">
                 <p>The humble authors of this thing (aw, thank you <3)<br><a href="https://github.com/LuisBar05" target="_blank">@LuisBar05</a>, <a href="https://github.com/BalbyReny" target="_blank">@BalbyReny</a>, and <a href="https://github.com/JustAGentleman" target="_blank">@JustAGentleman</a>.</p>
                 <p>After thousands and thousands of page refreshes, <del>copying and pasting code</del> typing and backspacing, experimenting, and a bunch of images filtered, it was a good one.</p>
-                <p>If you are curious and want to look behind this page, <a href="https://github.com/BalbyReny/BIP-Backend-Image-Processor" target="_blank">see our repo on GitHub</a>.</p>
+                <p>If you are curious and want to look behind this page, <a href="https://github.com/LuisBar05/BIP" target="_blank">see our repo on GitHub</a>.</p>
             </div>
         </div>
 
